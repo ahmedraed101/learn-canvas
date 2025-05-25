@@ -1,3 +1,31 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-console.log(ctx)
+let canvas;
+let ctx;
+let flowField;
+let flowFieldAnimation;
+
+window.onload = function () {
+    canvas = document.getElementById("canvas1");
+    ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    flowField = new FlowFeildEffect(ctx, canvas.width, canvas.height);
+    flowField.animate(0)
+}
+
+window.onresize = function () {
+    cancelAnimationFrame(flowFieldAnimation);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    flowField = new FlowFeildEffect(ctx, canvas.width, canvas.height);
+    flowField.animate(0)
+}
+
+
+const mouse = {
+    x: 0, y: 0
+}
+
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+})
